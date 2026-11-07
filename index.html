@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10233f">
+  <title>Sireesha Apartment Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="Sireesha Apartment home">
+        <span class="brand-symbol">S<span>•</span></span>
+        <span class="brand-name"><strong>SIREESHA</strong><small>APARTMENT MANAGEMENT</small></span>
+      </a>
+      <div class="property-chip">
+        <span class="property-icon">⌂</span>
+        <span><b>Sireesha Apartments</b><small>Visitor control center</small></span>
+        <span class="tiny-chevron">⌄</span>
+      </div>
+      <div class="nav-heading">WORKSPACE</div>
+      <nav class="nav-list">
+        <button class="nav-link active" data-section="dashboard"><span class="nav-icon">▦</span> Dashboard</button>
+        <button class="nav-link" data-section="visitors"><span class="nav-icon">♧</span> Visitor records</button>
+        <button class="nav-link" data-section="register"><span class="nav-icon">＋</span> Register visitor</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="photo-placeholder">
+          <div class="photo-frame"><span>YOUR PHOTO</span><small>ADD LATER</small></div>
+          <p><b>Site administrator</b><small>Profile photo space reserved</small></p>
+        </div>
+        <div class="secure-note"><span class="secure-dot"></span><span><b>Access log active</b><small>Visitor records save to MySQL</small></span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="menuToggle" aria-label="Open navigation">☰</button>
+        <div class="breadcrumb">Sireesha Apartments <span>/</span> <b id="crumb">Dashboard</b></div>
+        <div class="top-actions">
+          <span class="live-status"><i></i> SYSTEM ONLINE</span>
+          <div class="avatar">SA</div>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> APARTMENT SECURITY PORTAL</div>
+          <h1>Good day, <span>Security Team.</span></h1>
+          <p>Keep every arrival organised. Track visitors, manage entry records, and help keep Sireesha Apartments secure.</p>
+          <button class="primary-button" id="heroRegister"><span>＋</span> Register a visitor <span class="button-arrow">↗</span></button>
+        </div>
+        <div class="hero-art" role="img" aria-label="Modern apartment buildings">
+          <div class="art-glow"></div>
+          <div class="art-caption"><span class="caption-icon">⌂</span><span><b>Sireesha Apartments</b><small>SECURE LIVING, EVERY DAY</small></span></div>
+        </div>
+      </section>
+
+      <section class="content-section" id="dashboardSection">
+        <div class="section-heading">
+          <div><div class="eyebrow muted">OVERVIEW</div><h2>Visitor activity</h2><p>A quick view of today's entry activity.</p></div>
+          <div class="date-pill"><span>◷</span><span id="todayLabel">Loading date…</span></div>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Total visits</span><span class="stat-icon teal">↗</span></div><div class="stat-number" id="totalStat">—</div><div class="stat-foot"><span class="stat-dot teal-dot"></span> All recorded visits</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Currently inside</span><span class="stat-icon blue">⌂</span></div><div class="stat-number" id="insideStat">—</div><div class="stat-foot"><span class="stat-dot green-dot"></span> Active visitor entries</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Today's arrivals</span><span class="stat-icon violet">↘</span></div><div class="stat-number" id="todayStat">—</div><div class="stat-foot"><span class="stat-dot violet-dot"></span> Check-ins today</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Departed today</span><span class="stat-icon amber">✓</span></div><div class="stat-number" id="departedStat">—</div><div class="stat-foot"><span class="stat-dot amber-dot"></span> Check-outs completed</div></article>
+        </div>
+
+        <div class="records-panel">
+          <div class="panel-heading"><div><h3>Recent visitors</h3><p>Latest activity recorded at the gate</p></div><button class="text-button" id="viewAll">View all records <span>→</span></button></div>
+          <div class="table-tools"><div class="search-box"><span>⌕</span><input id="dashboardSearch" type="search" placeholder="Search visitor, flat or purpose…"></div><span class="results-label" id="dashboardCount">Loading records…</span></div>
+          <div class="table-wrap"><table><thead><tr><th>VISITOR</th><th>FLAT / BLOCK</th><th>PURPOSE</th><th>CHECK-IN</th><th>STATUS</th><th>ACTION</th></tr></thead><tbody id="recentRows"><tr><td colspan="6" class="empty-cell">Loading visitor records…</td></tr></tbody></table></div>
+          <div class="table-footer"><span>Records are stored in your MySQL database.</span><button class="text-button" id="refreshBtn">↻ Refresh</button></div>
+        </div>
+      </section>
+
+      <section class="content-section hidden" id="visitorsSection">
+        <div class="section-heading"><div><div class="eyebrow muted">RECORDS</div><h2>Visitor records</h2><p>Search entry history and check visitors out.</p></div><button class="primary-button compact" id="recordsRegister">＋ Register visitor</button></div>
+        <div class="records-panel">
+          <div class="panel-heading"><div><h3>All visitors</h3><p>Showing up to 500 most recent records</p></div></div>
+          <div class="table-tools"><div class="search-box"><span>⌕</span><input id="recordsSearch" type="search" placeholder="Search name, phone, flat…"></div><select id="statusFilter" class="filter-select"><option value="">All statuses</option><option value="checked_in">Currently inside</option><option value="checked_out">Checked out</option></select></div>
+          <div class="table-wrap"><table><thead><tr><th>VISITOR</th><th>FLAT / BLOCK</th><th>PURPOSE</th><th>CHECK-IN</th><th>CHECK-OUT</th><th>STATUS</th><th>ACTION</th></tr></thead><tbody id="allRows"><tr><td colspan="7" class="empty-cell">Loading visitor records…</td></tr></tbody></table></div>
+        </div>
+      </section>
+
+      <section class="content-section hidden" id="registerSection">
+        <div class="section-heading"><div><div class="eyebrow muted">NEW ENTRY</div><h2>Register a visitor</h2><p>Enter visitor details to create a check-in record.</p></div></div>
+        <div class="form-layout">
+          <form class="form-panel" id="visitorForm">
+            <div class="form-title"><span class="form-title-icon">＋</span><div><h3>Visitor details</h3><p>Fields marked with * are required.</p></div></div>
+            <div class="form-grid">
+              <label class="field full"><span>Visitor full name <i>*</i></span><input name="visitor_name" required maxlength="120" placeholder="Enter visitor's full name"></label>
+              <label class="field"><span>Phone number <i>*</i></span><input name="phone" required inputmode="tel" maxlength="20" placeholder="+91 98765 43210"></label>
+              <label class="field"><span>Flat number <i>*</i></span><select name="flat_id" id="flatSelect" required><option value="">Loading flats…</option></select><small>Options load directly from the MySQL flats table.</small></label>
+              <label class="field full"><span>Purpose of visit <i>*</i></span><select name="purpose" required><option value="">Select visit purpose</option><option>Family / Friend</option><option>Food delivery</option><option>Courier / Parcel</option><option>Maintenance / Repair</option><option>Housekeeping</option><option>Business meeting</option><option>Other</option></select></label>
+              <label class="field full"><span>Vehicle number <small>OPTIONAL</small></span><input name="vehicle_number" maxlength="30" placeholder="e.g. AP 21 AB 1234"></label>
+              <label class="field full"><span>Additional notes <small>OPTIONAL</small></span><textarea name="notes" rows="3" maxlength="500" placeholder="Any additional information for the security log…"></textarea></label>
+            </div>
+            <div class="form-actions"><button type="reset" class="secondary-button">Clear form</button><button type="submit" class="primary-button" id="submitVisitor">Save & check in <span>→</span></button></div>
+          </form>
+          <aside class="form-side">
+            <div class="side-illustration"><div class="side-building">▥</div><div class="side-shield">✓</div></div>
+            <div class="side-copy"><div class="eyebrow">SECURITY FIRST</div><h3>Every entry,<br>properly recorded.</h3><p>Saving a visitor automatically records their check-in time. Remember to check them out when they leave.</p></div>
+            <div class="side-check"><span>✓</span><div><b>Database-backed records</b><small>Saved to MySQL, not just your browser.</small></div></div>
+            <div class="side-check"><span>✓</span><div><b>Easy departure tracking</b><small>One click records check-out time.</small></div></div>
+            <div class="photo-slot"><div class="photo-slot-inner"><span>YOUR PHOTO GOES HERE</span><small>Reserved space — replace later</small></div></div>
+          </aside>
+        </div>
+      </section>
+
+      <footer class="footer"><span>© <span id="year"></span> Sireesha Apartment Management System</span><span><i class="footer-dot"></i> Visitor log connected to MySQL</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
